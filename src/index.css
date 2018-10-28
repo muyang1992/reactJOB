@@ -15,7 +15,9 @@
 .page-content{
     padding: 45px 5px;
 }
-
+#chat-page{
+    padding-bottom: 45px;
+}
 #chat-page .chat-me .am-list-extra{
     flex-basis: auto;
 }

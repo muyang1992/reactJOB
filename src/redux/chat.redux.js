@@ -18,11 +18,10 @@ const initSate={
 export function chat(state=initSate,action){
     switch(action.type){
         case MSG_LIST:
-            console.log('msglistshuju',action.payload)
             return {...state,users:action.payload.users,chatmsg:action.payload.msgs,unread:action.payload.msgs.filter(v=>!v.read&&v.to==action.payload.userid).length};
         case MSG_RECV:
-            const n=action.payload.msg.to==action.payload.userid?1:0;
-            return {...state,chatmsg:[...state.chatmsg,action.payload],unread:state.unread+n};
+            const n=action.payload.msg.to===action.payload.userid?1:0;
+            return {...state,chatmsg:[...state.chatmsg,action.payload.msg],unread:state.unread+n};
         case MSG_READ:
             const {from,num}=action.payload;
              return {...state,chatmsg:state.chatmsg.map(v=>({...v,read:from===v.from?true:v.read})),unread:state.unread-num}
@@ -70,7 +69,6 @@ export function recvMsg(){
     return (dispatch,getState)=>{
         socket.on('recvmsg',function(data){
             const userid=getState().user._id;
-            console.log('recvmsg',data);
             dispatch(msgRecv(data,userid));
         })
     }

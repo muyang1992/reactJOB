@@ -48,7 +48,6 @@ Router.post('/login',function(req,res){
 Router.post('/readmsg',function(req,res){
     const  userid=req.cookies.userid;
     const {from}=req.body;
-    console.log(userid,from);
     Chat.update({from,to:userid},{read:true},{'muti':true},function(err,doc){
         if(!err){
             return res.json({code:0,num:doc.nModified});
@@ -62,13 +61,6 @@ Router.post('/register',function(req,res){
         if(doc){
             return res.json({code:1,msg:'用户名重复'});
         }else{
-            // User.create({user,type,pwd:md5Pwd(pwd)},function(err,doc){//这个写法不能够返回注册成功之后的数据，因此需要使用
-            //     //User.save 的方式去写
-            //     if(err){
-            //         return res.json({code:1,msg:'后端出错了'});
-            //     }
-            //     return res.json({code:0});
-            // });
             const userModel=new User({user,type,pwd:md5Pwd(pwd)});
             userModel.save(function(err,doc){
                 if(err){

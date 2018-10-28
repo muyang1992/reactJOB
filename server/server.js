@@ -14,11 +14,9 @@ const io=require('socket.io')(server);
 
 io.on('connection',function(socket){
     socket.on('sendmsg',function(data){
-        console.log(data);
         const {from,to,msg}=data;
         const chatid=[from,to].sort().join('_');
         Chat.create({chatid,from,to,content:msg},function(err,doc){
-            console.log('调用派发事件');
             io.emit('recvmsg',Object.assign({},doc._doc));//派发一个全局事件
         });
     });

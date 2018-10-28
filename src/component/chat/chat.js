@@ -37,6 +37,7 @@ class Chat extends React.Component{
         const to=this.props.match.params.user;
         const msg=this.state.text;
         this.props.sendMsg({from,to,msg});
+        console.log(this.props);
         this.setState({
             text:'',
             showEmoji:false
@@ -52,6 +53,7 @@ class Chat extends React.Component{
         const users=this.props.chat.users;
         const chatid=getChatId(userid,this.props.user._id);
         const chatmsgs=this.props.chat.chatmsg.filter(v=>v.chatid==chatid);
+        console.log(this.props);
         if(!users[userid]){
             return null;
         }//如果没有users数据或者没有对应的用户数据，则就不需要渲染了

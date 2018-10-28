@@ -18,7 +18,7 @@ class AuthRoute extends React.Component{
          用户的type 身份是牛人还是boss
          用户的信息是否已经完善
          */
-        const publicList=['./login','register'];
+        const publicList=['/login','/register'];
         const pathname=this.props.location.pathname; 
         if(publicList.indexOf(pathname)>-1){
             return null;
@@ -33,7 +33,6 @@ class AuthRoute extends React.Component{
                         //没有登录信息
                         this.props.history.push('/login');
                     }
-                    console.log(res.data);
                 }
             });
     }

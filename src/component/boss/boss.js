@@ -22,3 +22,5 @@ class Boss extends React.Component{
 }
 
 export default Boss;
+
+
